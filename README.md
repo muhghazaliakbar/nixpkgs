@@ -96,20 +96,20 @@ cd ~/.config/nixpkgs
 - Run Build  
   command for build: `nix build .#darwinConfigurations.[NAME].system`  
   Available for `[NAME]`:
-  - `RG`
+  - `muhghazaliakbar`
 
 ```console
-nix build .#darwinConfigurations.RG.system
+nix build .#darwinConfigurations.muhghazaliakbar.system
 ```
 
 - Apply from `Result`  
   command for apply the result: `./result/sw/bin/darwin-rebuild switch --flake .#[NAME]`  
   Available for `[NAME]`:
-  - `RG`  
+  - `muhghazaliakbar`  
     After `Run Build` you can apply from `./result` with this command
 
 ```console
-./result/sw/bin/darwin-rebuild switch --flake .#RG
+./result/sw/bin/darwin-rebuild switch --flake .#muhghazaliakbar
 ```
 
 - Done 🚀🎉

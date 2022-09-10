@@ -9,13 +9,13 @@
     binaryCaches = [
       "https://cache.nixos.org/"
       # using cachix from r17
-      "https://r17.cachix.org/"
+      # "https://r17.cachix.org/"
     ];
 
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       # using cachix from r17
-      "r17.cachix.org-1:vz0nG6BCbdgTPn7SEiOwe/3QwvjH1sb/VV9WLcBtkAY="
+      # "r17.cachix.org-1:vz0nG6BCbdgTPn7SEiOwe/3QwvjH1sb/VV9WLcBtkAY="
     ];
 
     trustedUsers = [
@@ -45,8 +45,8 @@
     # $ darwin-rebuild changelog
     stateVersion = 4;
     # Keyboard
-    keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToEscape = true;
+    # keyboard.enableKeyMapping = true;
+    # keyboard.remapCapsLockToEscape = true;
     # Add ability to used TouchID for sudo authentication
   };
 }

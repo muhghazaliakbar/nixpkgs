@@ -16,13 +16,6 @@
     home-manager.inputs.flake-compat.follows = "flake-compat";
     home-manager.inputs.utils.follows = "flake-utils";
 
-
-    # Android Development
-    android-nixpkgs = {
-      url = "github:tadfisher/android-nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
     # Other sources
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     flake-utils.url = "github:numtide/flake-utils";
@@ -36,26 +29,17 @@
       # Configuration for `nixpkgs`
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-        overlays = attrValues self.overlays
-          ++ singleton (
-          # Sub in x86 version of packages that don't build on Apple Silicon yet
-          final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            inherit (final.pkgs-x86)
-              yadm
-              niv;
-          })
-        )
-          ++ singleton (inputs.android-nixpkgs.overlays.default);
+        overlays = attrValues self.overlays;
       };
 
       # Personal configuration shared between `nix-darwin` and plain `home-manager` configs.
       homeManagerStateVersion = "22.05";
 
       primaryUserInfo = {
-        username = "r17";
-        fullName = "Rin";
-        email = "hi@rin.rocks";
-        nixConfigDirectory = "/Users/r17/.config/nixpkgs";
+        username = "muhghazaliakbar";
+        fullName = "Muh Ghazali Akbar";
+        email = "muhghazalakbar@icloud.com";
+        nixConfigDirectory = "/Users/muhghazaliakbar/.config/nixpkgs";
       };
 
       # Modules shared by most `nix-darwin` personal configurations.
@@ -89,7 +73,7 @@
       ];
     in
     {
-      # Current Macbook Pro M1 from Ruangguru.com
+      # Current Macbook Pro M1
       darwinConfigurations = rec {
         # TODO refactor darwin.nix to make common or bootstrap configuration
         bootstrap-x86 = makeOverridable darwinSystem {
@@ -99,28 +83,13 @@
 
         bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
-        RG = makeOverridable darwinSystem {
+        muhghazaliakbar = makeOverridable darwinSystem {
           system = "aarch64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
               users.primaryUser = primaryUserInfo;
-              networking.computerName = "RG";
-              networking.hostName = "RG";
-              networking.knownNetworkServices = [
-                "Wi-Fi"
-                "USB 10/100/1000 LAN"
-              ];
-            }
-          ];
-        };
-
-        eR17 = makeOverridable darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            {
-              users.primaryUser = primaryUserInfo;
-              networking.computerName = "eR17";
-              networking.hostName = "eR17";
+              networking.computerName = "muhghazaliakbar";
+              networking.hostName = "muhghazaliakbar";
               networking.knownNetworkServices = [
                 "Wi-Fi"
                 "USB 10/100/1000 LAN"
@@ -141,9 +110,6 @@
         r17-packages = import ./home/packages.nix;
         r17-shell = import ./home/shells.nix;
         r17-git = import ./home/git.nix;
-        r17-tmux = import ./home/tmux.nix;
-        r17-neovim = import ./home/neovim.nix;
-        r17-alacritty = import ./home/alacritty.nix;
         r17-devshell = import ./home/devShell.nix;
 
         home-user-info = { lib, ... }: {
@@ -165,8 +131,8 @@
         system-darwin = import ./system/darwin/system.nix;
         system-darwin-packages = import ./system/darwin/packages.nix;
         system-darwin-security-pam = import ./system/darwin/security.nix;
-        system-darwin-gpg = import ./system/darwin/gpg.nix;
-        system-darwin-window-manager = import ./system/darwin/wm.nix;
+        # system-darwin-gpg = import ./system/darwin/gpg.nix;
+        # system-darwin-window-manager = import ./system/darwin/wm.nix;
       };
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import inputs.nixpkgs-unstable {

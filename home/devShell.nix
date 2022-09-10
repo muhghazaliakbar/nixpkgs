@@ -15,33 +15,6 @@ let
   # you can combine one or many devShell on environment, example:
   # use nix-env go node14
   devShells = with pkgs; {
-    android =
-      let
-        android-sdk = androidSdk (sdkPkgs: with sdkPkgs; [
-          emulator
-          cmdline-tools-latest
-          tools
-          platform-tools
-          platforms-android-29
-          # platforms-android-30
-          # build system tools for android related 
-          build-tools-29-0-2
-          # build-tools-32-0-0
-          # patch
-          patcher-v4
-          # see here: https://github.com/tadfisher/android-nixpkgs/blob/1d27f12eb37772b0ae1354e68a898f71394c28e4/channels/stable/default.nix#L7162 
-          # android for create avd and use in emulator
-          # system-images-android-30-google-apis-x86-64
-          # system-images-android-30-google-apis-playstore-arm64-v8a
-          # platforms-android-30
-          system-images-android-29-google-apis-playstore-arm64-v8a
-          extras-google-google-play-services
-        ]);
-      in
-      mkShell {
-        buildInputs = [ android-sdk jre8 gradle ];
-      };
-
     node14 = mkShell {
       buildInputs = [ python27 ];
       packages = [
@@ -70,23 +43,6 @@ let
           (yarnOverride {
             nodejs = nodejs-18_x;
           })
-        ];
-      };
-
-    go = mkShell
-      { packages = [ go ]; };
-
-    go16 = mkShell
-      {
-        packages = [
-          (go.overrideAttrs (oldAttrs: rec {
-            version = "1.16.5";
-
-            src = fetchurl {
-              url = "https://dl.google.com/go/go${version}.src.tar.gz";
-              sha256 = "sha256-e/p+WQjHzJ512l3fMGbXy88/2fpRlFhRMl7rwX9QuoA=";
-            };
-          }))
         ];
       };
   };

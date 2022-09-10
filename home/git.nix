@@ -1,20 +1,17 @@
 { config, pkgs, ... }:
 
 let
-  work = {
-    name = "R Adysurya Agus";
-    email = "adysurya@ruangguru.com";
-    signingKey = "F7B293AE6EAB33EE";
+  me = {
+    name = "Muh Ghazali Akbar";
+    email = "muhghazaliakbar@live.com";
   };
-  evil = {
-    name = "r17x";
-    email = "ri7nz@evilfactory.id";
-    signingKey = "5CA1E57AFBF76F90";
+  PalauaAndSons = {
+    name = "Muh Ghazali Akbar";
+    email = "muhghazaliakbar@live.com";
   };
-  w1 = {
-    name = "r17x";
-    email = "ri7nz@evilfactory.id";
-    signingKey = "5CA1E57AFBF76F90";
+  Riviera4Media = {
+    name = "Muh Ghazali Akbar";
+    email = "muhghazaliakbar@live.com";
   };
 in
 {
@@ -43,49 +40,24 @@ in
   };
 
   programs.git.extraConfig = {
-    gpg.program = "gpg";
     rerere.enable = true;
-    commit.gpgSign = true;
-    pull.ff = "only";
-    diff.tool = "vimdiff";
     difftool.prompt = false;
-    merge.tool = "vimdiff";
-    url = {
-      "git@gitlab.com" = {
-        insteadOf = "https://gitlab.com";
-      };
-    };
   };
 
   programs.git.includes = [
     {
-      condition = "gitdir:~/w0/";
-      contents.user = work;
+      condition = "gitdir:~/PalauaAndSons/";
+      contents.user = PalauaAndSons;
     }
 
     {
-      condition = "gitdir:~/w1/";
-      contents.user = w1;
-    }
-
-    {
-      condition = "gitdir:~/go/";
-      contents.user = work;
-    }
-
-    {
-      condition = "gitdir:~/evl/";
-      contents.user = evil;
-    }
-
-    {
-      condition = "gitdir:~/.local/share/";
-      contents.user = evil;
+      condition = "gitdir:~/riviera4media/";
+      contents.user = Riviera4Media;
     }
 
     {
       condition = "gitdir:~/.config/nixpkgs/";
-      contents.user = evil;
+      contents.user = me;
     }
   ];
 
