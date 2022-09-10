@@ -46,12 +46,12 @@ in
 
   programs.git.includes = [
     {
-      condition = "gitdir:~/PalauaAndSons/";
+      condition = "gitdir:~/Projects/PalauaAndSons/";
       contents.user = PalauaAndSons;
     }
 
     {
-      condition = "gitdir:~/riviera4media/";
+      condition = "gitdir:~/Projects/riviera4media/";
       contents.user = Riviera4Media;
     }
 
