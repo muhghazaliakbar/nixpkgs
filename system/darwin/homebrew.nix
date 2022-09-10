@@ -24,7 +24,7 @@ in
   '';
 
   homebrew.enable = true;
-  homebrew.onActivation.cleanup = "zap";
+  # homebrew.onActivation.cleanup = "zap";
   homebrew.global.brewfile = true;
 
   homebrew.taps = [
@@ -68,16 +68,18 @@ in
     "vlc"
     "ray"
     "asana"
+    "elastic/tap/elasticsearch-full"
   ];
-
-  # Configuration related to casks
-  environment.variables.SSH_AUTH_SOCK = mkIfCaskPresent "1password-cli"
-    "/Users/${config.users.primaryUser.username}/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock";
 
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
-    "swift-format"
-    "swiftlint"
+    # "swift-format"
+    # "swiftlint"
+
+    {
+      name = "elastic/tap/elasticsearch-full";
+      restart_service = "changed";
+    }
   ];
 }
