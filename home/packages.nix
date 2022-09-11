@@ -71,6 +71,8 @@
       redis
       mailhog
       mysql80
+      virtualenv
+      python.pkgs.pip
       
       # PHP
       php81
