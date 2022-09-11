@@ -77,9 +77,9 @@ in
     # "swift-format"
     # "swiftlint"
 
-    {
-      name = "elastic/tap/elasticsearch-full";
-      restart_service = "changed";
-    }
+    # {
+    #   name = "elastic/tap/elasticsearch-full";
+    #   restart_service = "changed";
+    # }
   ];
 }
